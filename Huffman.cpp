@@ -50,7 +50,7 @@ int main(){
     // // char [lines[i].size() + 1];
     // // strcpy(cstr, lines[i].c_str());
 
-    char input[] = "abaagabbcttae";
+    char input[] = "hhhadjhhaaaeeajj";
     vector<char> alphabet;
 
     alphabet.push_back('$');
@@ -66,7 +66,7 @@ int main(){
 
     for (int i = 0; i < tam; i++) {
         numOcurrences[i] = qtdLetters(alphabet[i], input);
-        prob[i] = (float)numOcurrences[i] / tam;
+        prob[i] = (float)numOcurrences[i] / sizeof(input);
     }
 
     print(numOcurrences, tam);
@@ -158,7 +158,7 @@ void sortByProb(vector<float> &a, vector<char> &alph, int tam){
 float getMenorProbabilidade(vector<float> &prob){
     vector<float>::iterator it = prob.end();
     float aux = prob[prob.size() - 1];
-    prob.erase(it);
+    prob.pop_back();
 
     return aux;
 }
