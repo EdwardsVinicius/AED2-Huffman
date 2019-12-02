@@ -132,12 +132,15 @@ void createWriteTxt(string text){
     outfile.close();
 }
 
-string encodeString(){
-	string str;
+void encodeString(){
+	//string str;
 	ifstream inFile;
 
-	inFile.open("in.txt");
-	inFile >> str;
+	//inFile.open("in.txt");
+	std::ifstream t("in.txt");
+	std::string str((std::istreambuf_iterator<char>(t)),
+    std::istreambuf_iterator<char>());
+	//inFile >> str;
 
 	string encodedString; 
 	calcFreq(str, str.length()); 
@@ -153,13 +156,18 @@ string encodeString(){
 	//cout << "\nEncoded Huffman data:\n" << encodedString << endl; 
     
 	createWriteTxt(encodedString);
-	return encodedString;
 }
 
-string decodeString(string str){
+void decodeString(){
+	string str;
+	ifstream inFile;
+	inFile.open("out.txt");
+	inFile >> str;
+	//cout << str;
+
 	string decodedString;
 	decodedString = decode_file(minHeap.top(), str); 
-	return decodedString;
+	cout<< decodedString;
     //cout << "\nDecoded Huffman Data:\n" << decodedString << endl; 
 }
 
@@ -167,11 +175,9 @@ int main()
 { 	
 	auto start = high_resolution_clock::now(); 
 
-	string encoded, decoded;
-	encoded = encodeString();
-	decoded = decodeString(encoded);
-	cout << encoded << endl;
-	cout << decoded << endl;
+
+	encodeString();
+	decodeString();
 	auto stop = high_resolution_clock::now(); 
 	auto duration = duration_cast<microseconds>(stop - start); 
 	cout << "Time taken by function: "
